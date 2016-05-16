@@ -1,6 +1,6 @@
 <?php
 namespace lib;
-include "db.php";
+include "../db.php";
 class Publishers extends Db {
     public function fetchAll(){
         $conn = $this->ConnectDB();
@@ -29,20 +29,33 @@ if (isset($_POST['menu'])){
 <body>
 <div class="container">
     <form method="post">
-        <nav id="header" class="navbar navbar-default navbar-fixed-top container" role="navigation">
-            <button id="add" type="button" class="btn btn-default">Добавить запись</button>
-            <button name="menu" type="submit" id="add" class="btn btn-default" style="float: right;">Главное меню</button>
-            <table class="title table table-striped">
-                <tr>
-                    <td width="50">№</td>
-                    <td width="120">Название</td>
-                    <td width="100">Город</td>
-                    <td width="150">Телефон</td>
-                    <td width="220">E-mail</td>
-                    <td>Веб-сайт</td>
-                    <td width="260"></td>
-                </tr>
-            </table>
+        <nav id="header" class="navbar navbar-fixed-top" role="navigation">
+            <ul id="panel" class="nav navbar-nav">
+                <li><a href="output.php">Выдача книг</a></li>
+                <li><a href="books.php">Книги</a></li>
+                <li><a href="authors.php">Авторы</a></li>
+                <li><a href="genres.php">Жанры</a></li>
+                <li><a href="readers.php">Читатели</a></li>
+                <li><a href="languages.php">Языки</a></li>
+                <li id="current"><a href="publishers.php">Издательства</a></li>
+                <li><a href="debtors.php">Должники</a></li>
+                <li><a href="popular.php">Популярные книги месяца</a></li>
+                <li><a href="">Добавить</a></li>
+            </ul>
+            <!--<button id="add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">Добавить запись</button>-->
+            <div class="container">
+                <table class="title table table-striped">
+                    <tr>
+                        <td width="50">№</td>
+                        <td width="120">Название</td>
+                        <td width="100">Город</td>
+                        <td width="150">Телефон</td>
+                        <td width="220">E-mail</td>
+                        <td>Веб-сайт</td>
+                        <td width="260"></td>
+                    </tr>
+                </table>
+            </div>
         </nav>
         <div class="table-responsive">
             <table class="table table-striped"  style="text-align: center;">

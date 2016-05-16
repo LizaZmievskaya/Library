@@ -12,7 +12,7 @@ body {
     background: 0;
 }
 .table {
-    margin-top: 115px;
+    margin-top: 150px;
     color: #ffffff;
 }
 /*@font-face{
@@ -49,7 +49,7 @@ body {
     font-family: "Monotype Corsiva", bold;
     background-color: rgba(116, 97, 141, 0.5);
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
     margin-bottom: 0;
 }
 td.title {
@@ -65,4 +65,27 @@ td.title {
 }
 .m {
     margin-bottom: 20px;
+}
+#panel {
+    color: #670b72;
+    font-size: 20pt;
+    font-family: "Monotype Corsiva", bold;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-color: #cccccc;
+    margin-top: 50px;
+    float: none;
+    text-align: center;
+}
+#panel li {
+    color: #670b72;
+    display: inline-block;
+}
+#panel a {
+    color: #670b72;
+    font-size: 18pt;
+    font-family: "Monotype Corsiva", bold;
+}
+#current {
+    text-decoration: none;
+    background-color: #eeeeee;
 }

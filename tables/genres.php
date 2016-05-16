@@ -1,21 +1,21 @@
 <?php
 namespace lib;
 include "../db.php";
-class Countries extends Db {
+class Genres extends Db {
     public function fetchAll(){
         $conn = $this->ConnectDB();
-        $stmt = $conn->prepare("SELECT * FROM `countries` ORDER BY country_id");
+        $stmt = $conn->prepare("SELECT * FROM `genres` ORDER BY id");
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
     }
 }
-$out = new Countries();
+$out = new Genres();
 $rows = $out->fetchAll();
 
-if (isset($_POST['menu'])){
+/*if (isset($_POST['menu'])){
     header("Location: index.php");
-}
+}*/
 ?>
 <!DOCTYPE>
 <html>
@@ -34,7 +34,7 @@ if (isset($_POST['menu'])){
                 <li><a href="output.php">Выдача книг</a></li>
                 <li><a href="books.php">Книги</a></li>
                 <li><a href="authors.php">Авторы</a></li>
-                <li><a href="genres.php">Жанры</a></li>
+                <li id="current"><a href="genres.php">Жанры</a></li>
                 <li><a href="readers.php">Читатели</a></li>
                 <li><a href="languages.php">Языки</a></li>
                 <li><a href="publishers.php">Издательства</a></li>
@@ -47,7 +47,7 @@ if (isset($_POST['menu'])){
                 <table class="title table table-striped">
                     <tr>
                         <td width="50">№</td>
-                        <td width="250">Страна</td>
+                        <td width="250">Жанр</td>
                         <td></td>
                     </tr>
                 </table>
@@ -56,9 +56,9 @@ if (isset($_POST['menu'])){
         <div class="table-responsive">
             <table class="table table-striped"  style="text-align: center;">
                 <?php for ($i = 0; $i < count($rows); $i++) {?>
-                    <tr data-id="<?= $rows[$i]['country_id']?>" data-country="<?= $rows[$i]['country']?>">
-                        <td width="50"><?= $rows[$i]['country_id']?></td>
-                        <td width="250"><?= $rows[$i]['country']?></td>
+                    <tr data-id="<?= $rows[$i]['id']?>" data-country="<?= $rows[$i]['genre']?>">
+                        <td width="50"><?= $rows[$i]['id']?></td>
+                        <td width="250"><?= $rows[$i]['genre']?></td>
                         <td><button name="edit" type="button" class="btn btn-default" data-toggle="modal" data-target="#editModal">Изменить</button>
                             <input name="delete" type="submit" class="btn btn-default" value="Удалить"></td>
                     </tr>
@@ -79,7 +79,7 @@ if (isset($_POST['menu'])){
             <form method="post">
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <input name="country" type="text" class="form-control" id="inputCountry" placeholder="Страна">
+                        <input name="genre" type="text" class="form-control" id="inputCountry" placeholder="Жанр">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -101,7 +101,7 @@ if (isset($_POST['menu'])){
             <form method="post">
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <input name="country" type="text" class="form-control" id="inputCountry" placeholder="Страна">
+                        <input name="genre" type="text" class="form-control" id="inputCountry" placeholder="Жанр">
                     </div>
                 </div>
                 <div class="modal-footer">
