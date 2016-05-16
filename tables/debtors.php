@@ -24,10 +24,10 @@ if (isset($_POST['menu'])){
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/tables.css">
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/tables.css">
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
 </head>
 <body>
 <div class="container">

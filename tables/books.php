@@ -25,8 +25,8 @@ if (isset($_POST['menu'])){
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/tables.css">
 </head>
 <body>
 <div class="container">

@@ -1,16 +1,16 @@
 <?php
 namespace lib;
 include "db.php";
-class Publishers extends Db {
+class Readers extends Db {
     public function fetchAll(){
         $conn = $this->ConnectDB();
-        $stmt = $conn->prepare("SELECT * FROM `publishers` ORDER BY publisher_id");
+        $stmt = $conn->prepare("SELECT * FROM `readers` ORDER BY reader_id");
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
     }
 }
-$out = new Publishers();
+$out = new Readers();
 $rows = $out->fetchAll();
 
 if (isset($_POST['menu'])){
@@ -21,10 +21,10 @@ if (isset($_POST['menu'])){
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/tables.css">
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/tables.css">
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../js/bootstrap.js"></script>
 </head>
 <body>
 <div class="container">
@@ -35,33 +35,33 @@ if (isset($_POST['menu'])){
             <table class="title table table-striped">
                 <tr>
                     <td width="50">№</td>
-                    <td width="120">Название</td>
-                    <td width="100">Город</td>
+                    <td width="140">Фамилия</td>
+                    <td width="140">Имя</td>
+                    <td width="250">Адрес</td>
+                    <td width="130">Серия и № паспорта</td>
                     <td width="150">Телефон</td>
-                    <td width="220">E-mail</td>
-                    <td>Веб-сайт</td>
-                    <td width="260"></td>
+                    <td></td>
                 </tr>
             </table>
         </nav>
         <div class="table-responsive">
             <table class="table table-striped"  style="text-align: center;">
                 <?php for ($i = 0; $i < count($rows); $i++) {?>
-                    <tr data-id="<?= $rows[$i]['publisher_id']?>">
-                        <td width="50"><?= $rows[$i]['publisher_id']?></td>
-                        <td width="120"><?= $rows[$i]['publish_name']?></td>
-                        <td width="100"><?= $rows[$i]['city']?></td>
+                    <tr>
+                        <td width="50"><?= $rows[$i]['reader_id']?></td>
+                        <td width="140"><?= $rows[$i]['second_name']?></td>
+                        <td width="140"><?= $rows[$i]['first_name']?></td>
+                        <td width="250"><?= $rows[$i]['adress']?></td>
+                        <td width="130"><?= $rows[$i]['passport']?></td>
                         <td width="150"><?= $rows[$i]['phone_num']?></td>
-                        <td width="220"><?= $rows[$i]['e_mail']?></td>
-                        <td><?= $rows[$i]['web_site']?></td>
-                        <td width="260"><button name="change" type="button" class="btn btn-default">Изменить</button>
-                            <input name="delete" type="button" class="btn btn-default" value="Удалить"></td>
+                        <td><button type="button" class="btn btn-default">Изменить</button>
+                            <button type="button" class="btn btn-default">Удалить</button></td>
                     </tr>
                 <?php } ?>
             </table>
         </div>
     </form>
 </div>
-<script src="js/actions_country.js"></script>
+<script src="../js/actions_readers.js"></script>
 </body>
 </html>
