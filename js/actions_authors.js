@@ -2,15 +2,17 @@ $(document).ready(function() {
     //DELETE
     $('input[name="delete"]').on('click',function (){
         var id = $(this).closest('tr').data('id');
+        var table = "authors";
+        var ident = "author_id";
         $.ajax({
-            url:'delete_country.php',
+            url:'../delete.php',
             method:'POST',
-            data: 'id=' + id,
+            data: 'id=' + id + '&table=' + table + '&ident=' + ident,
             type: 'Json',
             success: function(data){
                 data = jQuery.parseJSON(data);
                 if(data.status=='success'){
-                    $(this).closest('tr').remove();
+                    $("tr[data-id='" + id +"']").remove();
                 } else {//NEVEDOMAYA HUJNYA
                     $("#errorModal").modal("show");
                 }
@@ -19,11 +21,11 @@ $(document).ready(function() {
     });
     //ADD
     $('button[name=add]').on('click', function(){
-        var country = $('input#inputCountry').val();
+        var author = $('input#inputAuthor').val();
         $.ajax({
-            url:'add_country.php',
+            url:'../add_auth.php',
             method:'post',
-            data:'country=' + country,
+            data:'author=' + author,
             type:'json',
             success:function(data){
                 $("#addModal").modal("hide");
@@ -33,20 +35,21 @@ $(document).ready(function() {
     //EDIT
     $('button[name=edit]').on('click', function(){
         var id = $(this).closest('tr').data('id');
-        var country = $(this).closest('tr').data('country');
-        $('#editModal').attr('data-id',id,'data-country',country);
-        $('input[name="country"]').val(country);
+        var author = $(this).closest('tr').data('auth');
+        $('#editModal').attr('data-id',id);
+        $('#editModal').attr('data-auth',author);
+        $('input[name="author"]').val(author);
     });
     $('button[name=save]').on('click', function(){
         var id = $('#editModal').data('id');
-        var country = $('#editModal input[name="country"]').val();
+        var author = $('#editModal input[name="author"]').val();
         $.ajax({
-            url:'update_country.php',
-            method:'post',
-            data:'id=' + id + '&country=' + country,
+            url:'../update_auth.php',
+            method:'POST',
+            data:'id=' + id + '&author=' + author,
             type:'json',
             success:function(data){
-                $("#addModal").modal("hide");
+                $("#editModal").modal("hide");
             }
         });
     });

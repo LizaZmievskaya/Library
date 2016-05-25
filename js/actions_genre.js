@@ -2,8 +2,8 @@ $(document).ready(function() {
     //DELETE
     $('input[name="delete"]').on('click',function (){
         var id = $(this).closest('tr').data('id');
-        var table = "languages";
-        var ident = "lang_id";
+        var table = "genres";
+        var ident = "id";
         $.ajax({
             url:'../delete.php',
             method:'POST',
@@ -21,11 +21,11 @@ $(document).ready(function() {
     });
     //ADD
     $('button[name=add]').on('click', function(){
-        var language = $('input#inputLanguage').val();
+        var genre = $('input#inputGenre').val();
         $.ajax({
-            url:'../add_lang.php',
+            url:'../add_genre.php',
             method:'post',
-            data:'language=' + language,
+            data:'genre=' + genre,
             type:'json',
             success:function(data){
                 $("#addModal").modal("hide");
@@ -35,18 +35,18 @@ $(document).ready(function() {
     //EDIT
     $('button[name=edit]').on('click', function(){
         var id = $(this).closest('tr').data('id');
-        var language = $(this).closest('tr').data('language');
+        var genre = $(this).closest('tr').data('genre');
         $('#editModal').attr('data-id',id);
-        $('#editModal').attr('data-language',language);
-        $('input[name="language"]').val(language);
+        $('#editModal').attr('data-genre',genre);
+        $('input[name="genre"]').val(genre);
     });
     $('button[name=save]').on('click', function(){
         var id = $('#editModal').data('id');
-        var language = $('#editModal input[name="language"]').val();
+        var genre = $('#editModal input[name="genre"]').val();
         $.ajax({
-            url:'../update_lang.php',
+            url:'../update_genre.php',
             method:'POST',
-            data:'id=' + id + '&language=' + language,
+            data:'id=' + id + '&genre=' + genre,
             type:'json',
             success:function(data){
                 $("#editModal").modal("hide");

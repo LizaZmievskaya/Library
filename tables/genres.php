@@ -37,18 +37,17 @@ $rows = $out->fetchAll();
                 <li id="current"><a href="genres.php">Жанры</a></li>
                 <li><a href="readers.php">Читатели</a></li>
                 <li><a href="languages.php">Языки</a></li>
-                <li><a href="publishers.php">Издательства</a></li>
+                <li><a href="publishers.php">Издательства</a></li><br>
                 <li><a href="debtors.php">Должники</a></li>
                 <li><a href="popular.php">Популярные книги месяца</a></li>
-                <li><a href="">Добавить</a></li>
             </ul>
             <!--<button id="add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">Добавить запись</button>-->
             <div class="container">
                 <table class="title table table-striped">
                     <tr>
                         <td width="50">№</td>
-                        <td width="250">Жанр</td>
-                        <td></td>
+                        <td width="400">Жанр</td>
+                        <td><button id="add-btn" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">Добавить запись</button></td>
                     </tr>
                 </table>
             </div>
@@ -56,9 +55,9 @@ $rows = $out->fetchAll();
         <div class="table-responsive">
             <table class="table table-striped"  style="text-align: center;">
                 <?php for ($i = 0; $i < count($rows); $i++) {?>
-                    <tr data-id="<?= $rows[$i]['id']?>" data-country="<?= $rows[$i]['genre']?>">
+                    <tr data-id="<?= $rows[$i]['id']?>" data-genre="<?= $rows[$i]['genre']?>">
                         <td width="50"><?= $rows[$i]['id']?></td>
-                        <td width="250"><?= $rows[$i]['genre']?></td>
+                        <td width="400"><?= $rows[$i]['genre']?></td>
                         <td><button name="edit" type="button" class="btn btn-default" data-toggle="modal" data-target="#editModal">Изменить</button>
                             <input name="delete" type="submit" class="btn btn-default" value="Удалить"></td>
                     </tr>
@@ -79,7 +78,7 @@ $rows = $out->fetchAll();
             <form method="post">
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <input name="genre" type="text" class="form-control" id="inputCountry" placeholder="Жанр">
+                        <input name="genre" type="text" class="form-control" id="inputGenre" placeholder="Жанр">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -98,10 +97,10 @@ $rows = $out->fetchAll();
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Редактирование записи</h4>
             </div>
-            <form method="post">
+            <form method="post" action="../update_genre.php">
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <input name="genre" type="text" class="form-control" id="inputCountry" placeholder="Жанр">
+                        <input name="genre" type="text" class="form-control" id="inputGenre" placeholder="Жанр">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -134,6 +133,6 @@ $rows = $out->fetchAll();
         </div>
     </div>
 </div>
-<script src="../js/actions_country.js"></script>
+<script src="../js/actions_genre.js"></script>
 </body>
 </html>

@@ -18,24 +18,26 @@ LEFT JOIN `authors` ON output.author_id=authors.author_id");
         $result = $stmt->fetchAll();
         return $result;
     }
-   /* public function getAuthorID($book_name){
+    public function fetchAuth(){
         $conn = $this->ConnectDB();
-        $stmt = $conn->prepare("SELECT author_id FROM authors WHERE author_id=?");
-        $stmt->execute([$book_name]);
+        $stmt = $conn->prepare("SELECT author_id, auth_name FROM authors");
+        $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
     }
-    public function getAuthorByID($author_id){
+    public function fetchReader(){
         $conn = $this->ConnectDB();
-        $stmt = $conn->prepare("SELECT auth_name FROM authors WHERE author_id=?");
-        $stmt->execute([$author_id]);
+        $stmt = $conn->prepare("SELECT * FROM readers");
+        $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
-    }*/
+    }
 }
 $out = new Out();
 $rows = $out->fetchAll();
 $books = $out->fetchBooks();
+$auth = $out->fetchAuth();
+$reader = $out->fetchReader();
 /*if (isset($_POST['menu'])){
     header("Location: index.php");
 }*/
@@ -60,10 +62,9 @@ $books = $out->fetchBooks();
                 <li><a href="genres.php">Жанры</a></li>
                 <li><a href="readers.php">Читатели</a></li>
                 <li><a href="languages.php">Языки</a></li>
-                <li><a href="publishers.php">Издательства</a></li>
+                <li><a href="publishers.php">Издательства</a></li><br>
                 <li><a href="debtors.php">Должники</a></li>
                 <li><a href="popular.php">Популярные книги месяца</a></li>
-                <li><a href="">Добавить</a></li>
             </ul>
             <!--<button id="add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">Добавить запись</button>-->
             <div class="container">
@@ -75,7 +76,7 @@ $books = $out->fetchBooks();
                         <td width="210">Название книги</td>
                         <td width="155">Автор</td>
                         <td width="230">Фамилия, имя читателя</td>
-                        <td></td>
+                        <td><button id="add-btn" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">Добавить запись</button></td>
                     </tr>
                 </table>
             </div>
@@ -95,7 +96,7 @@ $books = $out->fetchBooks();
                         <td width="155"><?= $rows[$i]['auth_name']?></td>
                         <td width="115"><?= $rows[$i]['second_name']?></td>
                         <td width="115"><?= $rows[$i]['first_name']?></td>
-                        <td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#editModal">Изменить</button>
+                        <td><button type="button" name="edit" class="btn btn-default" data-toggle="modal" data-target="#editModal">Изменить</button>
                             <input name="delete" type="submit" class="btn btn-default" value="Удалить"></td>
                     </tr>
                 <?php } ?>
@@ -115,29 +116,33 @@ $books = $out->fetchBooks();
                 <div class="modal-body">
                     <div class="form-horizontal date m">
                         <label>Дата выдачи</label>
-                        <input name="odate" type="date" class="form-control" id="inputOdate">
+                        <input name="odate" type="date" class="form-control" id="inputOdate" max="<?= date('Y-m-d')?>">
                     </div>
                     <div class="form-horizontal date right m">
                         <label>Дата возврата</label>
-                        <input name="rdate" type="date" class="form-control" id="inputRdate">
+                        <input name="rdate" type="date" class="form-control" id="inputRdate" max="<?= date('Y-m-d')?>">
                     </div>
                     <div class="form-horizontal m">
-                        <!--<input name="country" type="text" class="form-control" id="inputBook" placeholder="Название книги">-->
                         <select name="book" class="form-control">
                             <?php for ($i = 0; $i < count($books); $i++) {?>
-                                <option><?= $books[$i]['book_name']?></option>
+                                <option value="<?= $books[$i]['book_id']?>"><?= $books[$i]['book_name']?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-horizontal m">
+                        <label>Фамилия, имя читателя</label>
+                        <select name="reader" class="form-control">
+                            <?php for ($i = 0; $i < count($reader); $i++) {?>
+                                <option value="<?= $reader[$i]['reader_id']?>"><?= $reader[$i]['second_name']?> <?= $reader[$i]['first_name']?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <!--<div class="form-horizontal m">
-                        <input name="country" type="text" class="form-control" id="inputAuthor" value="<?/*= $author=$out->getAuthorByID(); */?>" readonly>
-                    </div>-->
-                    <div class="form-horizontal m">
                         <input name="sname" type="text" class="form-control" id="inputSname" placeholder="Фамилия читателя">
                     </div>
                     <div class="form-horizontal m">
                         <input name="fname" type="text" class="form-control" id="inputFname" placeholder="Имя читателя">
-                    </div>
+                    </div>-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
@@ -155,32 +160,35 @@ $books = $out->fetchBooks();
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Редактирование записи</h4>
             </div>
-            <form method="post">
+            <form method="post" action="../update_out.php">
                 <div class="modal-body">
                     <div class="form-horizontal date m">
                         <label>Дата выдачи</label>
-                        <input name="odate" type="date" class="form-control" id="inputOdate">
+                        <input name="odate" type="date" class="form-control" id="inputOdate" max="<?= date('Y-m-d')?>">
                     </div>
                     <div class="form-horizontal date right m">
                         <label>Дата возврата</label>
-                        <input name="rdate" type="date" class="form-control" id="inputRdate">
+                        <input name="rdate" type="date" class="form-control" id="inputRdate" max="<?= date('Y-m-d')?>">
                     </div>
                     <div class="form-horizontal m">
-                        <input name="country" type="text" class="form-control" id="inputBook" placeholder="Название книги">
+                        <select name="book" class="form-control">
+                            <?php for ($i = 0; $i < count($books); $i++) {?>
+                                <option value="<?= $books[$i]['book_id']?>"><?= $books[$i]['book_name']?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="form-horizontal m">
-                        <input name="country" type="text" class="form-control" id="inputAuthor" placeholder="Автор">
-                    </div>
-                    <div class="form-horizontal m">
-                        <input name="country" type="text" class="form-control" id="inputSname" placeholder="Фамилия читателя">
-                    </div>
-                    <div class="form-horizontal m">
-                        <input name="country" type="text" class="form-control" id="inputFname" placeholder="Имя читателя">
+                        <label>Фамилия, имя читателя</label>
+                        <select name="reader" class="form-control">
+                            <?php for ($i = 0; $i < count($reader); $i++) {?>
+                                <option value="<?= $reader[$i]['reader_id']?>"><?= $reader[$i]['second_name']?> <?= $reader[$i]['first_name']?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                    <button name="add" type="submit" class="btn btn-default">Сохранить</button>
+                    <button name="save" type="submit" class="btn btn-default">Сохранить</button>
                 </div>
             </form>
         </div>

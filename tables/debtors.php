@@ -40,7 +40,7 @@ $rows = $out->fetchAll();
                 <li><a href="genres.php">Жанры</a></li>
                 <li><a href="readers.php">Читатели</a></li>
                 <li><a href="languages.php">Языки</a></li>
-                <li><a href="publishers.php">Издательства</a></li>
+                <li><a href="publishers.php">Издательства</a></li><br>
                 <li id="current"><a href="debtors.php">Должники</a></li>
                 <li><a href="popular.php">Популярные книги месяца</a></li>
             </ul>

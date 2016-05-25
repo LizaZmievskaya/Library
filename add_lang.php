@@ -5,4 +5,4 @@ $language = $_POST['language'];
 $stmt = $db->prepare("INSERT INTO languages VALUES ('','$language')");
 $stmt->execute();
 $host  = $_SERVER['HTTP_HOST'];
-header("Location: http://" . $host."/lib/countries.php");
+header("Location: http://" . $host."/lib/tables/languages.php");

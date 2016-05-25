@@ -12,7 +12,7 @@ body {
     background: 0;
 }
 .table {
-    margin-top: 150px;
+    margin-top: 165px;
     color: #ffffff;
 }
 /*@font-face{
@@ -72,7 +72,7 @@ td.title {
     font-family: "Monotype Corsiva", bold;
     background-color: rgba(255, 255, 255, 0.7);
     border-color: #cccccc;
-    margin-top: 50px;
+    margin-top: 10px;
     float: none;
     text-align: center;
 }
@@ -88,4 +88,10 @@ td.title {
 #current {
     text-decoration: none;
     background-color: #eeeeee;
+}
+#add-btn {
+    width: 210px;
+}
+.navbar-nav > li {
+    float: none;
 }
