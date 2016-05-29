@@ -11,4 +11,4 @@ $stmt = $db->prepare("UPDATE publishers SET publish_name = '$name', city = '$cit
 e_mail = '$email', web_site = '$site' WHERE publisher_id = '$id'");
 $stmt->execute();
 $host  = $_SERVER['HTTP_HOST'];
-header("Location: http://" . $host."/lib/tables/readers.php");
+header("Location: http://" . $host."/lib/tables/publishers.php");

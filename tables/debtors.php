@@ -16,7 +16,7 @@ LEFT JOIN `authors` ON output.author_id=authors.author_id WHERE return_date=0 OR
 $out = new Debtors();
 $rows = $out->fetchAll();
 
-/*if (isset($_POST['menu'])){
+/*if (isset($_POST['print'])){
     header("Location: index.php");
 }*/
 ?>
@@ -31,7 +31,7 @@ $rows = $out->fetchAll();
 </head>
 <body>
 <div class="container">
-    <form method="post">
+    <form method="post" action="../print.php">
         <nav id="header" class="navbar navbar-fixed-top" role="navigation">
             <ul id="panel" class="nav navbar-nav">
                 <li><a href="output.php">Выдача книг</a></li>
@@ -70,6 +70,7 @@ $rows = $out->fetchAll();
                 <?php } ?>
             </table>
         </div>
+        <input name="print" type="submit" class="btn btn-default" value="PDF">
     </form>
 </div>
 </body>

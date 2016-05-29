@@ -95,3 +95,13 @@ td.title {
 .navbar-nav > li {
     float: none;
 }
+#genre{
+    width: 200;
+}
+#chardiv{
+    background-image: url(../img/2.jpg);
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
+    background-attachment: fixed;
+    background-size: cover;
+}

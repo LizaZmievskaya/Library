@@ -91,4 +91,22 @@ $(document).ready(function() {
             }
         });
     });
+    //FILTER
+    /*$('input[name="ok"]').on('click',function (){
+        var id =$('select[name="fgenre"]').val();
+        $.ajax({
+            url:'../books.php',
+            method:'POST',
+            data: 'id=' + id + '&table=' + table + '&ident=' + ident,
+            type: 'Json',
+            success: function(data){
+                data = jQuery.parseJSON(data);
+                if(data.status=='success'){
+                    $("tr[data-id='" + id +"']").remove();
+                } else {//NEVEDOMAYA HUJNYA
+                    $("#errorModal").modal("show");
+                }
+            }
+        });
+    });*/
 })

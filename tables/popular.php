@@ -28,6 +28,8 @@ if (isset($_POST['menu'])){
     <link rel="stylesheet" href="../css/tables.css">
     <script src="../js/jquery-2.1.4.min.js"></script>
     <script src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
 </head>
 <body>
 <div class="container">
@@ -68,6 +70,71 @@ if (isset($_POST['menu'])){
             </table>
         </div>
     </form>
+    <div id="chartdiv" style="margin-left: 20%; width: 60%; height: 400px;" ></div>
 </div>
+<!-- amCharts javascript code -->
+<script type="text/javascript">
+    AmCharts.makeChart("chartdiv",
+        {
+            "type": "serial",
+            "categoryField": "category",
+            "angle": 30,
+            "depth3D": 30,
+            "startDuration": 1,
+            "fontSize": 10,
+            "categoryAxis": {
+                "gridPosition": "start",
+                "color": "white"
+            },
+            "trendLines": [],
+            "graphs": [
+                {
+                    "balloonText": "[[title]]: [[value]]",
+                    "fillAlphas": 1,
+                    "gapPeriod": 1,
+                    "id": "AmGraph-1",
+                    "lineColor": "#9BACF8",
+                    "title": "Была выдана",
+                    "type": "column",
+                    "valueField": "column-1",
+                    "color": "white"
+                }
+            ],
+            "guides": [],
+            "valueAxes": [
+                {
+                    "id": "ValueAxis-1",
+                    //"title": "",
+                    "color": "white"
+                }
+            ],
+            "allLabels": [],
+            "balloon": {},
+            "legend": {
+                "enabled": true,
+                "useGraphSettings": true,
+                "color": "white"
+            },
+            "titles": [
+                {
+                    "id": "Title-1",
+                    "size": 18,
+                    "text": "Популярность книг",
+                    "color": "white"
+                }
+            ],
+            "dataProvider": [
+                <?php for ($i = 0; $i < count($rows); $i++){?>
+                {
+
+                    "category": "<?php echo $rows[$i]['book_name']?>",
+                    "column-1": "<?php echo $rows[$i]['num']?>",
+                    "color": "white"
+                },
+                <?php } ?>
+            ]
+        }
+    );
+</script>
 </body>
 </html>

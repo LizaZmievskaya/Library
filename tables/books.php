@@ -40,7 +40,20 @@ ORDER BY books.book_id");
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
-    }
+    }/*
+    public function fetchFilter(){
+        $fgenre = $_POST['fgenre'];
+        $conn = $this->ConnectDB();
+        $stmt = $conn->prepare("SELECT * FROM `books` LEFT JOIN `publishers` ON books.publisher_id=publishers.publisher_id
+LEFT JOIN `languages` ON languages.lang_id=books.lang_id
+LEFT JOIN `authors` ON books.author_id=authors.author_id
+LEFT JOIN `genres` ON books.genre_id=genres.id
+WHERE genre_id='3'
+ORDER BY books.book_id");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }*/
 }
 $out = new Book();
 $rows = $out->fetchAll();
@@ -49,8 +62,10 @@ $lang = $out->fetchLang();
 $auth = $out->fetchAuth();
 $genres = $out->fetchGenres();
 
-/*if (isset($_POST['menu'])){
-    header("Location: index.php");
+/*if (isset($_POST['ok'])){
+    header("Location: books.php");
+} else {
+    $rows = $out->fetchAll();
 }*/
 //var_dump($rows);die;
 ?>
@@ -80,6 +95,15 @@ $genres = $out->fetchGenres();
             </ul>
             <!--<button id="add" type="button" class="btn btn-default" data-toggle="modal" data-target="#addModal">Добавить запись</button>-->
             <div class="container">
+                <!--<div>
+                    <label>Жанр</label>
+                    <select id="genre" name="fgenre" class="form-control">
+                        <?php /*for ($i = 0; $i < count($genres); $i++) {*/?>
+                            <option value="<?/*= $genres[$i]['id']*/?>"><?/*= $genres[$i]['genre']*/?></option>
+                        <?php /*} */?>
+                    </select>
+                    <input name="ok" type="submit" value="Фильтр">
+                </div>-->
                 <table class="title table table-striped">
                     <tr>
                         <td width="50">№</td>

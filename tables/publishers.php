@@ -121,7 +121,7 @@ $rows = $out->fetchAll();
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title">Редактирование записи</h4>
             </div>
-            <form method="post" action="../update_reader.php">
+            <form method="post" action="../update_publisher.php">
                 <div class="modal-body">
                     <div class="form-horizontal m">
                         <input name="name" type="text" class="form-control" required id="inputName" placeholder="Название">
